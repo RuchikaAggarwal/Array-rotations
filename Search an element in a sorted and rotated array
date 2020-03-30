@@ -1,0 +1,80 @@
+#include<iostream>
+using namespace std;
+int findpivot(int arr[],int fi,int li)
+{
+    if(fi>li)
+    {
+        return -1;
+    }
+    if(fi==li)
+    {
+        return fi;
+    }
+    int mid=(fi+li)/2;
+
+    if(mid>fi&&arr[mid-1]>arr[mid])
+    {
+        return (mid-1);
+    }
+
+     if(mid<li&&arr[mid+1]<arr[mid]) //of single input< used betwn mid nd li
+    {
+        return (mid);
+    }
+    if(arr[fi]>=arr[mid])
+    {
+        return findpivot(arr,fi,mid-1);
+
+    }
+
+    return findpivot(arr,mid+1,li);
+
+
+}
+
+int binarysearch(int arr[],int start,int endd,int key)
+{
+    if (endd < start)
+    return -1;
+    int mid=(start+endd)/2;
+    if(arr[mid]==key)
+    {
+        return mid;
+    }
+    if(key<arr[mid])
+    {
+        return binarysearch(arr,0,(mid-1),key);
+    }
+    else if(key>arr[mid])
+    {
+        return binarysearch(arr,(mid+1),endd,key);
+    }
+}
+
+int search(int arr[],int n,int key)
+{
+    int pivot=findpivot(arr,0,n-1);
+    if (pivot == -1)
+    return binarysearch(arr, 0, n-1, key);
+    if(key==arr[pivot])
+    {
+        return pivot;
+    }
+    if(arr[0]<=key)
+    {
+         return binarysearch(arr,0,pivot-1,key);
+    }
+    else
+    {
+        return binarysearch(arr,pivot+1,n-1,key);
+    }
+}
+int main()
+{
+     int arr[]={5,6,7,8,9,10,1,2,3};
+     int n=sizeof(arr)/sizeof(arr[0]);
+     int key=2;
+     int ans=search(arr,n,key);
+     cout<<ans;
+     return 0;
+}
