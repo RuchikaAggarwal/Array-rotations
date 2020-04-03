@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+int pairfinding(int arr[],int n,int x)
+{
+    int i;
+    //find pivot firstly
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]>arr[i+1])
+        break;
+    }
+    int l=(i+1)%n;
+    int r=i;
+    while(l!=r)
+    {
+        if(arr[l]+arr[r]==x)
+        {
+            cout<<"yeah pair found"<<arr[l]<<","<<arr[r];
+        return 0;
+        }
+        else if(arr[l]+arr[r]<x)
+        {
+            l=(l+1)%n;
+            
+        }
+        else
+        {
+            r=(n+r-1)%n;
+        }
+    }
+    return 0;
+    
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++)
+	{
+	    cin>>arr[i];
+	    
+	}
+	int x;
+	cin>>x;
+    pairfinding(arr,n,x);
+}
