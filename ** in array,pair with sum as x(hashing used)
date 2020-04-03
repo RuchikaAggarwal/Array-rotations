@@ -1,0 +1,31 @@
+#include <stdio.h>
+#define max 10000
+void hashingused(int arr[],int n,int x)
+{
+    bool s[max]={0};
+    int temp;
+    for(int i=0;i<n;i++)
+    {
+        temp=x-arr[i];
+        if(s[temp]==1)
+        {
+            cout<<"yes"<<arr[i]<<","<<x-arr[i];
+        }
+        s[arr[i]]=1;
+    }
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++)
+	{
+	    cin>>arr[i];
+	    
+	}
+	int x;
+	cin>>x;
+	hashingused(arr,n,x);
+}
