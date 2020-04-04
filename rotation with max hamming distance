@@ -1,0 +1,56 @@
+#include <iostream>
+#include<math.h>
+using namespace std;
+int maxhamming(int arr[],int n)
+{
+    int maxham=0;
+    int i,j,k;
+    int b[2*n+1];
+    //coping array twice in b linewise
+    for(i=0;i<n;i++)
+    {
+        b[i]=arr[i];
+    }
+    for(i=0;i<n;i++)
+    {
+        b[n+i]=arr[i];
+    }
+    
+    //now compare
+    for(i=1;i<n;i++)    //i means rotations
+    {   
+        int curham=0;
+        for(j=i,k=0;j<i+n;j++,k++) //j is new arrays(b)index and k is prev array i.e. arr index
+        {
+            if(b[j]!=arr[k])
+            {
+                curham++;
+            }
+        }
+        
+        if(maxham==n)
+        {
+            return n;
+        }
+        
+        maxham=max(maxham,curham);
+        
+    }
+    return maxham;
+    
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	int arr[n];
+	for(int i=0;i<n;i++)
+	{
+	    cin>>arr[i];
+	    
+	}
+	int ans=maxhamming(arr,n);
+	cout<<ans;
+	
+}
